@@ -1,0 +1,14 @@
+{
+  "name": "public",
+  "version": "0.1.0",
+  "description": "Frontend for this project",
+  "scripts": {
+    "build": "esbuild app.js --bundle --outfile=out.js"
+  },
+  "main": "index.js",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "esbuild": "^0.15.12"
+  }
+}
