@@ -1,8 +1,6 @@
 package main
 
 import (
-	""
-
 	"github.com/gofiber/fiber/v2"
 	cmd "github.com/tooolbox/esbuild/src/esbuild/main"
 )
@@ -26,7 +24,6 @@ func main() {
 		app.Static(urls[i].prefix, urls[i].root)
 	}
 
-	build.setupEsbuild()
 	cmd.Run()
 	// app.Listen(":4000")
 }
