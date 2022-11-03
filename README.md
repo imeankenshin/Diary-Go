@@ -1,7 +1,15 @@
 # My first Go project
 
+Litterally, this is my first project use [Go](https://go.dev) mainly.
+
 ---
 
-## About
+## Feature
 
-hello world
+### Language
+
+- go
+- html/css
+- javascript
+
+### packages
