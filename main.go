@@ -9,6 +9,6 @@ func main() {
 	app.Get("/hello", func(c *fiber.Ctx) error {
 		return c.SendString("hello")
 	})
-	app.Static("/", "./public")
+	app.Static("/storage", "./storage")
 	app.Listen(":4000")
 }
