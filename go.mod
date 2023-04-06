@@ -41,6 +41,7 @@ require (
 // )
 
 require (
+	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	// github.com/evanw/esbuild v0.15.12
 	github.com/klauspost/compress v1.15.11 // indirect
 	// github.com/tooolbox/esbuild v0.1.13
