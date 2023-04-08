@@ -31,11 +31,11 @@ func main() {
 		password := req.Get("Password")
 		// check if name, mail, password are not empty
 		if name == "" || mail == "" || password == "" {
-			return echo.NewHTTPError(http.StatusBadRequest, "name, mail, password can not be empty")
+			return echo.NewHTTPError(http.StatusBadRequest, ErrorMessage{Message: "name, mail, password can not be empty"})
 		}
 		data, err := auth.CreateUser(name, mail, password)
 		if err != nil {
-			return err
+			return echo.NewHTTPError(http.StatusBadRequest, ErrorMessage{Message: err.Error()})
 		}
 		return c.JSON(http.StatusOK, data.InsertedID)
 	})

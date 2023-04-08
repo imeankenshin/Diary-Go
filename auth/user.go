@@ -35,6 +35,13 @@ type Auth struct {
 	Token string     `json:"token"`
 	Model ClientUser `json:"model"`
 }
+type JWTCustomClaims struct {
+	Name      string `json:"username"`
+	Mail      string `json:"mail"`
+	Birthday  string `json:"birthday"`
+	CreatedAt string `json:"created_at"`
+	jwt.StandardClaims
+}
 
 func CreateUser(name string, mail string, password string) (*mongo.InsertOneResult, error) {
 	ctx := context.Background()
@@ -55,8 +62,12 @@ func CreateUser(name string, mail string, password string) (*mongo.InsertOneResu
 	if err != nil {
 		return nil, err
 	}
-	// if the db already has a user which has an same mail as inputed mail, return error
-
+	// 既に入力されたユーザーが存在している場合、エラーを出す
+	filter := bson.M{"mail": mail}
+	var userHasSentMail bson.M
+	if err := usrs.FindOne(ctx, filter).Decode(&userHasSentMail); err == nil {
+		return nil, errors.New("user already exists")
+	}
 	data := bson.M{
 		"name":       name,
 		"mail":       mail,
@@ -69,12 +80,6 @@ func CreateUser(name string, mail string, password string) (*mongo.InsertOneResu
 		return nil, err
 	}
 	return res, err
-}
-
-type jwtCustomClaims struct {
-	Name string `json:"username"`
-	Mail string `json:"mail"`
-	jwt.StandardClaims
 }
 
 func Login(mail string, password string) (*Auth, error) {
@@ -97,14 +102,14 @@ func Login(mail string, password string) (*Auth, error) {
 		return nil, errors.New("password is not matched")
 	}
 	// JWTをする
-	token := jwt.NewWithClaims(jwt.SigningMethodHS256, &jwtCustomClaims{
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256, &JWTCustomClaims{
 		Name: result.Name,
 		Mail: result.Mail,
 		StandardClaims: jwt.StandardClaims{
 			ExpiresAt: time.Now().Add(time.Hour * 24 * 365).Unix(),
 		},
 	})
-	tokenString, err := token.SignedString([]byte(result.Password))
+	tokenString, err := token.SignedString([]byte("nothing"))
 	if err != nil {
 		return nil, err
 	}
