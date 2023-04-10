@@ -29,13 +29,3 @@ func Connect() (*mongo.Client, error) {
 	ui.Greenln("Connected to MongoDB!")
 	return client, nil
 }
-
-// func AddDocument(name string, data interface{}) error {
-// 	client, err := Connect()
-// 	if err != nil {
-// 		return err
-// 	}
-// 	defer client.Disconnect(context.Background())
-// 	// DBにする
-// 	client.Database("maindb").Collection(name).InsertOne(context.Background(), data)
-// }
