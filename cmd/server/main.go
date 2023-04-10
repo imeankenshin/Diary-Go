@@ -1,7 +1,7 @@
-package routes
+package server
 
 import (
-	"first_go/auth"
+	"first_go/internal/auth"
 	"net/http"
 
 	echojwt "github.com/labstack/echo-jwt/v4"

@@ -4,8 +4,6 @@ import (
 	"context"
 	"fmt"
 
-	"first_go/ui"
-
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
@@ -26,6 +24,5 @@ func Connect() (*mongo.Client, error) {
 	if err != nil {
 		return nil, err
 	}
-	ui.Greenln("Connected to MongoDB!")
 	return client, nil
 }

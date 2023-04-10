@@ -2,8 +2,8 @@ package auth
 
 import (
 	"context"
-	"first_go/app"
-	"first_go/db"
+	"first_go/pkg/app"
+	"first_go/pkg/db"
 	"net/http"
 	"time"
 

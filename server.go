@@ -1,7 +1,7 @@
 package main
 
 import (
-	"first_go/routes"
+	"first_go/cmd/server"
 )
 
 type ErrorMessage struct {
@@ -9,7 +9,7 @@ type ErrorMessage struct {
 }
 
 func main() {
-	app := routes.App()
+	app := server.App()
 	// Start server on https://localhost:1000
 	app.Logger.Fatal(app.Start(":1000"))
 }
