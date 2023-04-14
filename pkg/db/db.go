@@ -10,19 +10,16 @@ import (
 
 func Connect() (*mongo.Client, error) {
 	// MongoDBに接続するためのURIを定義する
-	uri := "mongodb://localhost:27017"
+	uri := "mongodb://root:root@localhost:27017"
 	fmt.Println("Trying to connect " + uri + " ...")
 	// MongoDBに接続するためのオプションを定義する
 	clientOptions := options.Client().ApplyURI(uri)
-	// MongoDBに接続する
+
+	// MongoDBに接続するためのクライアントを生成する
 	client, err := mongo.Connect(context.Background(), clientOptions)
 	if err != nil {
 		return nil, err
 	}
-	// MongoDBに接続できたことを確認する
-	err = client.Ping(context.Background(), nil)
-	if err != nil {
-		return nil, err
-	}
+
 	return client, nil
 }

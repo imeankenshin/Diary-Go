@@ -11,5 +11,5 @@ type ErrorMessage struct {
 func main() {
 	app := server.App()
 	// Start server on https://localhost:1000
-	app.Logger.Fatal(app.Start(":1000"))
+	app.Logger.Fatal(app.StartTLS(":1000", "certificate/ca.crt", "certificate/ca.key"))
 }

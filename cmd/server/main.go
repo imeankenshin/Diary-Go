@@ -2,6 +2,7 @@ package server
 
 import (
 	"first_go/internal/auth"
+	"first_go/internal/diary"
 	"net/http"
 
 	echojwt "github.com/labstack/echo-jwt/v4"
@@ -23,12 +24,11 @@ func App() *echo.Echo {
 	app.POST("/auth/new", auth.CreateUser)
 	app.POST("/auth", auth.Login)
 	// 認可しないとアクセスできないルート
-	userOnly := app.Group("/useronly")
+	userOnly := app.Group("/diary")
 	userOnly.Use(echojwt.WithConfig(echojwt.Config{
 		SigningKey: []byte("nothing"),
 	}))
-	userOnly.GET("", func(c echo.Context) error {
-		return c.String(http.StatusOK, "hello wolrd")
-	})
+	userOnly.GET("", diary.GetDiary)
+	userOnly.POST("", diary.PostDiary)
 	return app
 }
