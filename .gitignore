@@ -21,3 +21,6 @@ n
 *.njsproj
 *.sln
 *.sw?
+
+.env
+certificate
